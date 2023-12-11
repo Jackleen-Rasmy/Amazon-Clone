@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 django.setup()
 
 from faker import Faker 
-from products.models import Brand , Product, Review
+from products.models import Brand , Product, Review, ProductImages
 import random
 
 
@@ -36,5 +36,19 @@ def product_seed(n):
             
         )
 
+def product_images_seed(n):
+    fake = Faker()
+    images = ['01.jpg','02.jpg','03.jpg','04.jpg','05.jpg','06.jpg','07.jpg','08.jpg','09.jpg','10.jpg']
+    products = Product.objects.all()
+    
+    for product in products:
+        for _ in range(n):
+            ProductImages.objects.create(
+                image = f"product_images/{images[random.randint(0,9)]}",
+                product= product            
+            )
+            
 # brand_seed(200)
-product_seed(1000)
+# product_seed(1000)
+# product_images_seed(5)
+
