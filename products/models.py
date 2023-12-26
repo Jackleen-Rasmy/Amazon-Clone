@@ -25,7 +25,11 @@ class Product(models.Model):
         
     def __str__(self):
         return self.name
-        
+    
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
     
 
 
@@ -33,6 +37,9 @@ class ProductImages(models.Model):
     product = models.ForeignKey(Product,related_name='product_image',verbose_name=_('product'), on_delete=models.CASCADE)
     image = models.ImageField(_('image'),upload_to='product_images')
     
+    class Meta:
+        verbose_name = 'ProductImage'
+        verbose_name_plural = 'ProductImages'    
 
 class Brand(models.Model):
     name = models.CharField(_('name'),max_length=255)
