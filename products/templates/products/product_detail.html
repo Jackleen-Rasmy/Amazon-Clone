@@ -80,12 +80,12 @@
                                 <p>BRAND:<a href="#">radhuni</a></p>
                             </div>
                             <div class="details-rating">
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="active icofont-star"></i>
-                                <i class="icofont-star"></i>
-                                <a href="#">(3 reviews)</a>
+                                <i class="icofont-star {% if object.avg_rate > 0 %}active{% endif %}"></i>
+                                <i class="icofont-star {% if object.avg_rate > 1 %}active{% endif %}"></i>
+                                <i class="icofont-star {% if object.avg_rate > 2 %}active{% endif %}"></i>
+                                <i class="icofont-star {% if object.avg_rate > 3 %}active{% endif %}"></i>
+                                <i class="icofont-star {% if object.avg_rate > 4 %}active{% endif %}"></i>
+                                <a href="#">({{object.review_count}})</a>
                             </div>
                             <h3 class="details-price">
                                 {% comment %} <del>$38.00</del> {% endcomment %}
