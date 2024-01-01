@@ -21,6 +21,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+        # fields = ['name', 'flag', 'price', 'brand', 'review_count', 'avg_rate']
         
     # def get_review_count(self,object):
     #     # reviews = object.review_product.all().count()
