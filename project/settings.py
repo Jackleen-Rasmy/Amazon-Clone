@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'redis',
     'products',
     'settings',
+    'orders',
+    'accounts',
     
 ]
 

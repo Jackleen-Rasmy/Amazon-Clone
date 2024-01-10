@@ -9,7 +9,7 @@ class ProductImagesInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImagesInline]
     search_fields = ['name']
-    list_display = ['name', 'avg_rate', 'review_count']
+    list_display = ['name','flag', 'review_count', 'avg_rate']
     
 
 

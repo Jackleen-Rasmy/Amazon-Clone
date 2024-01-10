@@ -37,7 +37,7 @@ class Product(models.Model):
         reviews = self.review_product.all()
         if len(reviews) > 0:
             for item in reviews:
-                total += int(item.rate)
+                total += item.rate
             
             avg = total / len(reviews)
             
@@ -45,7 +45,6 @@ class Product(models.Model):
             avg = 0
             
         return avg
-    
     
     class Meta:
         ordering = ['-id']
@@ -78,7 +77,8 @@ class Review(models.Model):
     user = models.ForeignKey(User, related_name='review_user',verbose_name=_('user'), on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, related_name='review_product',verbose_name=_('product'), on_delete=models.CASCADE)
     review = models.TextField(_('review'),max_length=10000)
-    rate = models.CharField(_('rate'), max_length=100, choices=RATE_CHOICES)
+    # rate = models.CharField(_('rate'), max_length=100, choices=RATE_CHOICES)
+    rate = models.IntegerField(_('rate'), choices=[(i, i) for i in range(1, 6)])
     # rate = models.CharField(_('rate'),max_length=100, choices=[(i,i) for i in range(1,6)])
     created_at = models.DateTimeField(default=timezone.now)
 

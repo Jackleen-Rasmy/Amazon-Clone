@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Product, Review, ProductImages, Brand
 from django.db.models import Q, F , Value
@@ -115,4 +115,22 @@ def mydebug(request):
     # annotation
     # data = Product.objects.all().annotate(is_new=Value(0))   
     data = Product.objects.all().annotate(price_with_tax=F('price')*1.15)
-    return render(request, "products/debug.html", {'data':data})  
+    return render(request, "products/debug.html", {'data':data})
+
+
+def add_review(request,slug):
+    product = Product.objects.get(slug=slug)
+    user = request.user
+    rate = request.POST['rating']
+    review = request.POST['review']
+    
+    Review.objects.create(
+        product = product,
+        rate = rate,
+        review = review,
+        user = user
+    )
+    
+    return redirect(f'/products/{slug}')
+    
+    
