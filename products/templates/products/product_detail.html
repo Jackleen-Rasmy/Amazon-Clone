@@ -88,7 +88,6 @@
                                 <a href="#">({{object.review_count}})</a>
                             </div>
                             <h3 class="details-price">
-                                {% comment %} <del>$38.00</del> {% endcomment %}
                                 <span>${{object.price}}<small>/per kilo</small></span>
                             </h3>
                             <p class="details-desc">{{object.subtitle}}</p>
@@ -110,15 +109,21 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
-                                    <span>add to cart</span>
-                                </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
-                                </div>
+                                <form  class="row" method="post" action="/orders/add-to-cart">
+                                    {% csrf_token %}
+                                    <div class="col-lg-6">
+                                        <input class="action-input text-center rounded" title="Quantity Number" type="number" name="quantity" value="1">
+                                        <input  type="hidden" name="product_id" value="{{product.id}}">
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button class="product-add" title="Add to Cart" type="submit">
+                                            <i class="fas fa-shopping-basket"></i>
+                                            <span>add to cart</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            
                             </div>
                             <div class="details-action-group">
                                 <a class="details-wish wish" href="#" title="Add Your Wishlist">

@@ -4,3 +4,9 @@ ORDER_TYPE = [
     ('Shipped','Shipped'),
     ('Delivered','Delivered'),   
 ]
+
+CART_TYPE  =[ 
+      ('Inprogress', 'Inprogress'),
+      ('Completed','Completed')      
+            
+    ]
