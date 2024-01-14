@@ -10,8 +10,7 @@ class Address(models.Model):
 
     
     
-class DeliveryFee(models.Model):
-    fee = models.IntegerField()
+
     
  
     
