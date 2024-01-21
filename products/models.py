@@ -17,6 +17,7 @@ class Product(models.Model):
     description = models.TextField(_('description'),max_length=50000)
     brand = models.ForeignKey('Brand', related_name='product_brand',verbose_name=_('brand'),on_delete=models.SET_NULL, null=True)
     
+    quantity = models.IntegerField()
     slug = models.SlugField(blank=True,null=True, unique=True)
     
     def save(self, *args, **kwargs):
