@@ -3,10 +3,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 import datetime
 from rest_framework.response import Response
+from rest_framework import status
+
 
 from .serializers import OrderListSerializer, CartListSerializer, CouponSerializer
-from .models import Order , Cart , Coupon
+from .models import Order , Cart , Coupon, CartDetails , OrderDetails
 from settings.models import DeliveryFee
+from accounts.models import Address
+from products.models import Product
 
 
 class OrderListAPI(generics.ListAPIView):
@@ -60,3 +64,54 @@ class ApplyCouponAPI(generics.GenericAPIView):
             
         return Response({'message':'coupon not found'})
                 
+                
+                
+class CreateOrderAPI(generics.GenericAPIView):
+    
+    def post(self,request,*args,**kwargs):
+        user = User.objects.get(user=self.kwargs['username'])
+        code = request.data['payment_code']
+        address = request.data['address_id']
+        
+        cart = Cart.objects.get(user=user, status="Inprogress")
+        cart_detail = CartDetails.objects.filter(cart=cart)
+        user_address = Address.objects.get(id=address)
+        
+        # cart | order 
+        new_order = Order.objects.create(
+            user = user,
+            status = 'Recieved',
+            code = code,
+            delivery_address = user_address,
+            coupon = cart.coupon,
+            total = cart.cart_total,
+            total_with_coupon = cart.total_with_coupon
+            
+        )
+        
+        # cart detail | order detail
+        for item in cart_detail:
+            product = Product.objects.get(id=item.product.id)
+            
+            OrderDetails.objects.create(
+                order = new_order,
+                product = product,
+                quantity = item.quantity,
+                price = product.price,
+                total = round(item.quantity * product.price,2)
+            )
+            
+            # decrease product quantity
+            product.quantity -= item.quantity
+            product.save()
+            
+        # close cart
+        cart.status = 'Completed'
+        cart.save()
+        
+        # send email
+        
+        return Response({'message': 'order created successfully'}, status=status.HTTP_201_CREATED)
+            
+        
+           
