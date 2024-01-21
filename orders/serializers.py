@@ -24,3 +24,11 @@ class CartListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = '__all__'    
+        
+        
+        
+class CouponSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coupon
+        fields = '__all__'
+    
