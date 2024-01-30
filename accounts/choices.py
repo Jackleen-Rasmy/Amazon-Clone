@@ -4,3 +4,8 @@ ADDRESS_TYPE = [
     ('Office','Office'),
     ('Other','Other')
 ]
+
+PHONE_TYPE  = [
+    ('Primary','Primary'),
+    ('Secondary', 'Secondary')
+]
