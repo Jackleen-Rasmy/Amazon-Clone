@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,10 +44,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'redis',
+    "django_bootstrap5",
     'products',
     'settings',
     'orders',
-    'accounts',
     
 ]
 
@@ -161,7 +162,7 @@ AUTHENTICATION_BACKENDS = [
     'accounts.backend.EmailOrUsernameLogin'
 ]
 
-
+LOGIN_REDIRECT_URL = '/'
 
 
 
