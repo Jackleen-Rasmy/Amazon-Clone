@@ -4,6 +4,8 @@ from .models import Product, Brand
 from .pagination import CustomPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticated
+
 
 class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()
@@ -12,6 +14,7 @@ class ProductListAPI(generics.ListAPIView):
     filterset_fields = ['brand', 'flag']
     search_fields = ['name', 'subtitle', 'description']
     ordering_fields = ['price']
+    permission_classes = [IsAuthenticated]
     
 class ProductDetailAPI(generics.RetrieveAPIView):
     queryset = Product.objects.all()

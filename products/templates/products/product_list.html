@@ -362,7 +362,7 @@
                             
                             {% for product in product_list %}
                             <div class="col">
-                                <div class="product-card">
+                                <div class="product-card {% if product.quantity == 0 %} product-disable {% endif %}">
                                     <div class="product-media">
                                         <div class="product-label">
                                             <label class="label-text new">{{product.flag}}</label>
