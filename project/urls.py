@@ -36,6 +36,7 @@ urlpatterns = [
    # path('accounts/', include('allauth.urls')),
    path("__debug__/", include("debug_toolbar.urls")),
    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   path("i18n/", include("django.conf.urls.i18n")),
 ]
 
 urlpatterns += static(settings.STATIC_URL , document_root=settings.STATIC_ROOT)

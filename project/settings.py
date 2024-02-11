@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,6 +92,7 @@ INTERNAL_IPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,6 +100,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     "allauth.account.middleware.AccountMiddleware",
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+LOCALE_PATHS = ['locale']
+
+
+LANGUAGES = [
+    ("ar", _("Arabic")),
+    ("en", _("English")),
 ]
 
 ROOT_URLCONF = 'project.urls'
